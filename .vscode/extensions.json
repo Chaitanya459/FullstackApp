@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "christian-kohler.path-intellisense",
+    "gruntfuggly.todo-tree",
+    "mermaidchart.vscode-mermaid-chart"
+  ]
+}

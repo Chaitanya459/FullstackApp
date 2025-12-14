@@ -1,0 +1,79 @@
+{
+  "server": {
+    "url": "https://rsd.cech.uc.edu",
+    "port": 28960
+  },
+  "database": {
+    "username": "itsc",
+    "password": "itsc",
+    "database": "rsd",
+    "host": "",
+    "port": 5432,
+    "dialect": "postgres",
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "idle": 10000
+    },
+    "seederStorage": "json",
+    "logging": false,
+    "dialectOptions": {
+      "ssl": true,
+      "application_name": "RSD_API"
+    }
+  },
+  "token": {
+    "signKey": "",
+    "expire": "1d",
+    "passwordResetExpire": "1h",
+    "portalExpire": "2m",
+    "longExpire": "7890000000"
+  },
+  "session": {
+    "secret": "",
+    "secure": false,
+    "proxy": false,
+    "maxAge": "24 hours"
+  },
+  "cache": {
+    "host": "localhost",
+    "port": 6379,
+    "password": "",
+    "tls": true
+  },
+  "mailer": {
+    "host": "smtp.com",
+    "port": 25,
+    "sender": "noreply@uc.edu",
+    "name": "RSD",
+    "tls": {
+      "rejectUnauthorized": true
+    }
+  },
+  "sentry": "",
+  "file": {
+    "uploadDir": "./uploads"
+  },
+  "logging": {
+    "transports": {
+      "file": false,
+      "rotatingFile": false,
+      "console": true,
+      "elasticsearch": {
+        "enabled": false,
+        "nodes": [
+          ""
+        ],
+        "auth": {
+          "username": "",
+          "password": ""
+        }
+      }
+    },
+    "apm": {
+      "enabled": false,
+      "url": "",
+      "secretToken": ""
+    }
+  }
+}

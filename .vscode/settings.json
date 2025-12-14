@@ -1,0 +1,27 @@
+{
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.workingDirectories": [
+    "./packages/backend",
+    "./packages/client",
+    "./packages/types",
+    "./packages/visionHearingMigration"
+  ],
+  "cSpell.words": [
+    "arrify",
+    "casl"
+  ],
+  "github-enterprise.uri": "https://git.uc.edu",
+  "thunder-client.saveToWorkspace": true
+}

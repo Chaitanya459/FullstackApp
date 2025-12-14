@@ -1,0 +1,4 @@
+# Configs
+configs/*
+!configs/*.secret
+!configs/*.op.properties

@@ -1,0 +1,10 @@
+{
+  "name": "@rsd/database",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "reveal-secrets": "op inject -i ./configs/dev.op.properties -o ./configs/dev.properties -f && op inject -i ./configs/dev-to-staging.op.properties -o ./configs/dev-to-staging.properties -f && op inject -i ./configs/staging.op.properties -o ./configs/staging.properties -f",
+    "reveal-secrets:staging-to-prod": "op inject -i ./configs/staging-to-production.op.properties -o ./configs/staging-to-production.properties -f",
+    "reveal-secrets:prod": "op inject -i ./configs/production.op.properties -o ./configs/production.properties -f"
+  }
+}

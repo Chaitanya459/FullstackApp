@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/nodemon.json",
+  "watch": ["src", "config", "@types"],
+  "ext": ".ts,.js,.json",
+  "ignore": [],
+  "exec": "ts-node ./src/index.ts",
+  "delay": 100
+}

@@ -1,0 +1,47 @@
+{
+  "name": "rsd",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://git.uc.edu/MCESC/RSD.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "lerna run build --parallel",
+    "test": "lerna run test --parallel --since",
+    "test:cov": "lerna run test:cov --stream --since",
+    "lint": "lerna run lint --parallel --since",
+    "lint:fix": "lerna run lint:fix --stream --since",
+    "audit": "audit-ci --config .audit-ci.json",
+    "check-updates": "ncu --configFileName .check-updates.json",
+    "check-updates:fix": "ncu --configFileName .check-updates.json --upgrade --errorLevel 1",
+    "check-updates:all": "ncu --configFileName .check-updates.json --target latest --errorLevel 1",
+    "database": "sh ./scripts/db.sh --env=$npm_config_env --to=$npm_config_to --from=$npm_config_from",
+    "reveal-secrets": "lerna run reveal-secrets",
+    "reveal-secrets:prod": "lerna run reveal-secrets:prod",
+    "start": "lerna run start --stream",
+    "start:prod": "lerna run start:prod --stream",
+    "changed": "lerna changed",
+    "version": "lerna version",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.4.1",
+    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.39.1",
+    "@stylistic/eslint-plugin": "^5.6.1",
+    "audit-ci": "^7.1.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-import-quotes": "^0.0.1",
+    "eslint-plugin-sort-keys-custom-order": "^2.2.1",
+    "husky": "^9.1.7",
+    "lerna": "^9.0.3",
+    "npm-check-updates": "^19.1.2",
+    "typescript-eslint": "8.48.1"
+  }
+}

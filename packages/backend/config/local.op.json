@@ -1,0 +1,21 @@
+{
+  "server": {
+    "url": "http://localhost:3000"
+  },
+  "session": {
+    "secure": false,
+    "proxy": false
+  },
+  "logging": {
+    "transports": {
+      "console": true,
+      "rotatingFile": false,
+      "elasticsearch": {
+        "enabled": false
+      }
+    },
+    "apm": {
+      "enabled": false
+    }
+  }
+}

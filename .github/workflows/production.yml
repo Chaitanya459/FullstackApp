@@ -1,0 +1,32 @@
+name: Deploy to Production
+
+on:
+  release:
+    types: [released]
+  workflow_dispatch:
+
+concurrency:
+  group: production_environment
+  cancel-in-progress: true
+
+jobs:
+  liquibase-validate:
+    runs-on: [self-hosted, linux]
+    if: '!github.event.pull_request.draft'
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Liquibase Validate
+        uses: ITSC/Liquibase-Validate-Action@main
+        with:
+          ops-key: ${{ secrets.OPS_KEY }}
+          vault-name: MCESC RSD Prod Config
+          db-secret-path: RSD Prod PostgreSQL DB
+
+  deployment:
+    needs: liquibase-validate
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
+    with:
+      environment: production
+      target: ${{ github.ref_name }}

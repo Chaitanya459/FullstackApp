@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "name": "@rsd/vision-hearing-migration",
+  "description": "",
+  "types": "index.d.ts",
+  "author": "Wesley Reed<reedws@ucmail.uc.edu>",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "migrate": "ts-node src/migrate.ts",
+    "build": "tsc",
+    "test-excel": "ts-node src/test-excel.ts"
+  },
+  "dependencies": {
+    "typescript": "~5.8.3",
+    "pg": "^8.16.3",
+    "xlsx": "^0.18.5",
+    "dotenv": "^16.6.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.6",
+    "@types/node": "^22.19.1",
+    "ts-node": "^10.9.2"
+  }
+}

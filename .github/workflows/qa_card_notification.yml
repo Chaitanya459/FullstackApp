@@ -1,0 +1,27 @@
+name: QA Test Card Notification
+
+on:
+  deployment_status:
+  issues:
+    types: [closed]
+
+jobs:
+  teams-notification:
+    if: (github.event.deployment.environment != 'dev') && (github.event.deployment_status.state == 'success' || github.event.issue)
+    runs-on: [self-hosted, linux]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Notify teams channel for deployment
+        uses: ITSC/QA-Card-Notification-Action@main
+        with:
+          ms-teams-webhook-uri: ${{ secrets.QA_TEAMS_WEBHOOK }}
+          issue-title: ${{ github.event.issue.title || '' }}
+          repo-name: ${{ github.event.repository.full_name}}
+          environment: ${{ github.event.deployment.environment || github.event.issue.number}}
+          url: ${{ github.event.issue.html_url || 'https://git.uc.edu/MCESC/RSD/projects/1' }}
+          event: ${{ github.event.action }}
+          issue-state: ${{ github.event.issue.state_reason || ''}}

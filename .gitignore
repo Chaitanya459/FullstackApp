@@ -1,0 +1,68 @@
+# compiled output
+dist
+build
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env.*
+
+# Lerna files
+package.json.lerna_backup
+
+# pm2 configuration
+process.json
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+thunder-tests/thunderActivity.*
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Git Secret
+.gitsecret/keys/random_seed
+.gitsecret/keys/**/*~
+.gitsecret-prod/keys/random_seed
+.gitsecret-prod/keys/**/*~
+!*.secret

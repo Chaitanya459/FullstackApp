@@ -1,0 +1,49 @@
+{
+  "server": {
+    "url": "https://rsd-staging.cech.uc.edu"
+  },
+  "database": {
+    "host": "op://MCESC RSD Config/RSD Staging PostgreSQL/server",
+    "password": "op://MCESC RSD Config/RSD Staging PostgreSQL/password"
+  },
+  "token": {
+    "signKey": "op://MCESC RSD Config/RSD Staging Token/password"
+  },
+  "session": {
+    "secret": "op://MCESC RSD Config/RSD Staging Session/password",
+    "secure": true,
+    "proxy": true
+  },
+  "cache": {
+    "host": "op://MCESC RSD Config/RSD Staging Redis/server",
+    "password": "op://MCESC RSD Config/RSD Staging Redis/password"
+  },
+  "mailer": {
+    "host": "op://MCESC RSD Config/RSD Staging Mailer/server",
+    "name": "op://MCESC RSD Config/RSD Staging Mailer/name",
+    "sender": "op://MCESC RSD Config/RSD Staging Mailer/sender"
+  },
+  "logging": {
+    "transports": {
+      "console": false,
+      "rotatingFile": true,
+      "elasticsearch": {
+        "enabled": true,
+        "nodes": [
+          "op://Shared Config/Log Server/node1",
+          "op://Shared Config/Log Server/node2",
+          "op://Shared Config/Log Server/node3"
+        ],
+        "auth": {
+          "username": "op://Shared Config/Log Server/username",
+          "password": "op://Shared Config/Log Server/password"
+        }
+      }
+    },
+    "apm": {
+      "enabled": true,
+      "url": "op://Shared Config/Log Server/apm url",
+      "secretToken": "op://Shared Config/Log Server/secret token"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+name: Deployment
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+      target:
+        type: string
+        default: "."
+        required: false
+
+jobs:
+  deployment:
+    runs-on: [self-hosted, linux]
+    environment:
+      name: ${{ inputs.environment }}
+      url: https://${{ vars.HOST }}
+
+    steps:
+      - name: executing remote ssh commands for tag
+        uses: appleboy/ssh-action@v1.2.0
+        if: github.ref_type == 'tag'
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OPS_KEY }}
+        with:
+          host: ${{ vars.HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: itsc
+          script_stop: true
+          envs: OP_SERVICE_ACCOUNT_TOKEN
+          script: |
+              source /etc/profile
+              cd ${{ vars.DEPLOY_DIR }}
+              git fetch --tags --force
+              git checkout ${{ inputs.target }}
+              npm ci
+              npm run build
+              export NODE_ENV=${{ inputs.environment }}
+              ./scripts/reveal-secrets.sh
+              npm run database --env=${{ inputs.environment }} update
+              pm2 reload process.json
+
+      - name: executing remote ssh commands for branch
+        uses: appleboy/ssh-action@v1.2.0
+        if: github.ref_type == 'branch'
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OPS_KEY }}
+        with:
+          host: ${{ vars.HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: itsc
+          script_stop: true
+          envs: OP_SERVICE_ACCOUNT_TOKEN
+          script: |
+              source /etc/profile
+              cd ${{ vars.DEPLOY_DIR }}
+              git checkout ${{ inputs.target }}
+              git pull
+              npm ci
+              npm run build
+              export NODE_ENV=${{ inputs.environment }}
+              ./scripts/reveal-secrets.sh
+              npm run database --env=${{ inputs.environment }} update
+              pm2 reload process.json

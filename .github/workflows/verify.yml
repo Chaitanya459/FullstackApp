@@ -1,0 +1,65 @@
+name: Verify App
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, ready_for_review, synchronize]
+  workflow_call:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 22.x
+
+jobs:
+  install-deps:
+    runs-on: [self-hosted, linux]
+    if: '!github.event.pull_request.draft'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        uses: ./.github/actions/install-deps
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+  verify-app:
+    needs: install-deps
+    runs-on: [self-hosted, linux]
+    if: '!github.event.pull_request.draft'
+    strategy:
+      matrix:
+        command: [audit, test, lint]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        uses: ./.github/actions/install-deps
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm run ${{ matrix.command }}
+
+  build:
+    needs: install-deps
+    runs-on: [self-hosted, linux]
+    if: '!github.event.pull_request.draft'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        uses: ./.github/actions/install-deps
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Build Application
+        run: npm run build
+
+  liquibase-validate:
+    runs-on: [self-hosted, linux]
+    if: '!github.event.pull_request.draft'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Liquibase Validate
+        uses: ITSC/Liquibase-Validate-Action@main
+        with:
+          ops-key: ${{ secrets.OPS_KEY }}
+          vault-name: MCESC RSD Config
+          db-secret-path: RSD Dev PostgreSQL

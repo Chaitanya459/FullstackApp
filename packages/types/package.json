@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "name": "@types/rsd",
+  "description": "",
+  "types": "index.d.ts",
+  "author": "Wesley Reed<reedws@ucmail.uc.edu>",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "dependencies": {
+    "typescript": "~5.8.3"
+  }
+}
